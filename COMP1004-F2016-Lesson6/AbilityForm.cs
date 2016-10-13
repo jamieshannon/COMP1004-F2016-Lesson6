@@ -1,0 +1,93 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace COMP1004_F2016_Lesson6
+{
+    public partial class AbilityForm : Form
+    {
+        private Random _random;
+
+        // initialize variables in the constructor
+        public AbilityForm()
+        {
+            InitializeComponent();
+            this._initialize();
+        }
+
+        /// <summary>
+        /// This method is used to initialize class member variables
+        /// </summary>
+        private void _initialize()
+        {
+            this._random = new Random(); // instantiate object of type Random
+        }
+
+        private void RollAbilitiesButton_Click(object sender, EventArgs e)
+        {
+            // call the roll abilites method
+            RollAbilites();
+        }
+
+        /// <summary>
+        /// This method generates 6 abilities for the character sheet
+        /// </summary>
+        private void RollAbilites()
+        {
+            for (int count = 0; count < 6; count++)
+            {
+                // roll 4d6 and assign the value to each ability
+                Program.character.Strength = Roll4D6();
+                StrengthTextBox.Text = Program.character.Strength.ToString();
+
+                Program.character.Dexterity = Roll4D6();
+                DexterityTextBox.Text = Program.character.Dexterity.ToString();
+
+                Program.character.Constitution = Roll4D6();
+                ConstitutionTextBox.Text = Program.character.Constitution.ToString();
+
+                Program.character.Intelligence = Roll4D6();
+                IntelligenceTextBox.Text = Program.character.Intelligence.ToString();
+
+                Program.character.Wisdom = Roll4D6();
+                WisdomTextBox.Text = Program.character.Wisdom.ToString();
+
+                Program.character.Charisma = Roll4D6();
+                CharismaTextBox.Text = Program.character.Charisma.ToString();
+
+
+            }
+        }
+
+        /// <summary>
+        /// This method rolls 4d6 and returns the highest 3 dice
+        /// </summary>
+        private int Roll4D6()
+        {
+            List<int> dice = new List<int>(); // instantiates an empty integer list
+            int result = 0;
+
+            //roll 4d6
+            for (int count = 0; count < 4; count++)
+            {
+                dice.Add(this._random.Next(1, 7));
+            }
+
+            dice.Sort();
+
+            dice.RemoveAt(0);
+
+            result = dice.Sum();
+
+
+            return result;
+        }
+    }
+}
