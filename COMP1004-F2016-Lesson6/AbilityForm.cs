@@ -89,5 +89,17 @@ namespace COMP1004_F2016_Lesson6
 
             return result;
         }
+
+        private void NextButton_Click(object sender, EventArgs e)
+        {
+            // create an instance of the next form
+            RaceForm raceForm = new RaceForm();
+
+            // set the previous form property of the next form to this form
+            raceForm.previousForm = this;
+
+            raceForm.Show(); //show the next form
+            this.Hide(); //hide this form
+        }
     }
 }

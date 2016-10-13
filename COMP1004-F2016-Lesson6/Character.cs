@@ -18,5 +18,7 @@ namespace COMP1004_F2016_Lesson6
         public int Wisdom { get; set; }
 
         public int Charisma { get; set; }
+
+        public String Race { get; set; }
     }
 }
